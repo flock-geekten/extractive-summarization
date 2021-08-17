@@ -3,6 +3,9 @@ pandas
 mecab-python3
 jupyterlab
 
+# From text to sentence
+ja-sentence-segmenter
+
 # Deleting Emoji
 emoji
 
