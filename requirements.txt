@@ -1,0 +1,26 @@
+numpy
+pandas
+mecab-python3
+jupyterlab
+
+# Deleting Emoji
+emoji
+
+# full-width half-width conversion
+mojimoji
+
+# LexRank model
+sumy
+
+# Progress bar
+fastprogress 
+
+# Auto-formatting of code
+autopep8
+jupyterlab_code_formatter
+
+# Japanese display
+matplotlib
+japanize-matplotlib
+
+
