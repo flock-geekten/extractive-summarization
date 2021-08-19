@@ -1,49 +1,25 @@
 import re
 import emoji
+import neologdn
 import requests
 import unicodedata
 import nltk
 from nltk.corpus import wordnet
-#from bs4 import BeautifulSoup
 
 def data_cleaning(data):
     return [text_cleaning(text) for text in data]
 
 def text_cleaning(text):
     text = clean_text(text)
-    #text = clean_html_tags(text)
-    #text = clean_html_and_js_tags(text)
     text = clean_url(text)
     text = normalize(text)
     return text
 
 def clean_text(text):
     replaced_text = text.lower()
-    replaced_text = re.sub(r'[【】]', ' ', replaced_text)       # 【】の除去
-    replaced_text = re.sub(r'[（）()]', ' ', replaced_text)     # （）の除去
-    replaced_text = re.sub(r'[［］\[\]]', ' ', replaced_text)   # ［］の除去
-    replaced_text = re.sub(r'[@＠]\w+', '', replaced_text)  # メンションの除去
-    replaced_text = re.sub(
-        r'https?:\/\/.*?[\r\n ]', '', replaced_text)  # URLの除去
+    replaced_text = neologdn.normalize(replaced_text)    # 『楽しみ〜〜〜』の『〜〜〜』などを削除
     replaced_text = re.sub(r'　', ' ', replaced_text)  # 全角空白の除去
     return replaced_text
-
-"""
-def clean_html_tags(html_text):
-    soup = BeautifulSoup(html_text, 'html.parser')
-    cleaned_text = soup.get_text()
-    cleaned_text = ''.join(cleaned_text.splitlines())
-    return cleaned_text
-"""
-
-"""
-def clean_html_and_js_tags(html_text):
-    soup = BeautifulSoup(html_text, 'html.parser')
-    [x.extract() for x in soup.findAll(['script', 'style'])]
-    cleaned_text = soup.get_text()
-    cleaned_text = ''.join(cleaned_text.splitlines())
-    return cleaned_text
-"""
 
 def clean_url(html_text):
     cleaned_text = re.sub(r'http\S+', '', html_text)
@@ -51,10 +27,10 @@ def clean_url(html_text):
     return cleaned_text
 
 def normalize(text):
-    normalized_text = normalize_unicode(text)
-    normalized_text = delete_symbol(text)
-    normalized_text = normalize_number(normalized_text)
-    normalized_text = lower_text(normalized_text)
+    normalized_text = normalize_unicode(text) # 全角半角などの統一
+    normalized_text = delete_symbol(text) # 記号の削除(顔文字対策)
+    normalized_text = normalize_number(normalized_text) # 数字を全て0に
+    normalized_text = lower_text(normalized_text) # 小文字に統一
     return normalized_text
 
 def normalize_unicode(text, form='NFKC'):
@@ -72,3 +48,7 @@ def normalize_number(text):
 
 def lower_text(text):
     return text.lower()
+                                        
+def delete_kuten(word):
+    return re.sub(u'。','',word)
+                                        
