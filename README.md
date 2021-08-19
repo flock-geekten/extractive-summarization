@@ -51,7 +51,5 @@ coming soon
 - [Pythonによる自然言語処理技法をふんだんに使用した文書要約](https://software-data-mining.com/python%E3%81%AB%E3%82%88%E3%82%8B%E8%87%AA%E7%84%B6%E8%A8%80%E8%AA%9E%E5%87%A6%E7%90%86%E6%8A%80%E6%B3%95%E3%82%92%E3%81%B5%E3%82%93%E3%81%A0%E3%82%93%E3%81%AB%E4%BD%BF%E7%94%A8%E3%81%97%E3%81%9F/) ← かなり参考に
 - [A3RTとユーザーローカルの文章の自動要約を試してみた](https://crieit.net/posts/A3RT) ←[Doc2vecのAPI](https://a3rt.recruit-tech.co.jp/product/TextSummarizationAPI/)    
 
-## FastAPIに関する技術/手法
-
 ## 開発環境
 - [Docker + MeCab + JupyterLabによる分析環境の構築](https://system.blog.uuum.jp/entry/2019/10/18/110000)
