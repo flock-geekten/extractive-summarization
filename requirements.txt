@@ -3,17 +3,21 @@ pandas
 mecab-python3
 jupyterlab
 
-# From text to sentence
+# Correction of notational errors
+neologdn
+
+# From text to sentences
 ja-sentence-segmenter
+
+# From sentence to words
+mecabpr
 
 # Deleting Emoji
 emoji
 
-# full-width half-width conversion
-mojimoji
-
 # LexRank model
 sumy
+tinysegmenter
 
 # Progress bar
 fastprogress 
