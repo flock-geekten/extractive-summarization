@@ -5,8 +5,9 @@ from ja_sentence_segmenter.concatenate.simple_concatenator import concatenate_ma
 from ja_sentence_segmenter.normalize.neologd_normalizer import normalize
 from ja_sentence_segmenter.split.simple_splitter import split_newline, split_punctuation
 # クリーニング
-import data_cleaning as dc
+from modules import data_cleaning as dc
 # 名詞/形容詞/副詞/動詞のみを抽出 かつ 形態素解析の実行ライブラリ
+import re
 import mecabpr
 MECAB_IPADIC_NEOLOGD = '-r /etc/mecabrc -d /usr/lib/x86_64-linux-gnu/mecab/dic/mecab-ipadic-neologd'
 # 抽出型要約モデル(LexRank)
@@ -45,11 +46,18 @@ def separate_words(sentences):
         sentence_ma = []
         for word in ma:
             if word.split(',')[6] == "*":
-                wat = word.split('\t')[0] # word after transformation
-                sentence_ma.append(dc.delete_kuten(wat))
+                if not bool(re.search(r'[a-zA-Z]',word.split('\t')[0])):
+                    wat = word.split('\t')[0] # word after transformation
+                else :
+                    wat = re.sub(r"[a-zA-Z]", "", word.split('\t')[0])
+            elif bool(re.search(r'[a-zA-Z]',word.split(',')[6])):
+                if not bool(re.search(r'[a-zA-Z]',word.split(',')[7])):
+                    wat = word.split(',')[7] 
+                else :
+                    wat = re.sub(r"[a-zA-Z]", "", word.split(',')[6])
             else:
                 wat = word.split(',')[6]
-                sentence_ma.append(dc.delete_kuten(wat))
+            sentence_ma.append(dc.delete_kuten(wat))
         sentence_words.append(sentence_ma)
     return sentence_words
     
