@@ -2,7 +2,8 @@ FROM ubuntu:18.04
 
 
 # aptとpipの更新
-RUN apt update && apt -y upgrade
+RUN apt update
+RUN apt -y upgrade
 RUN apt install -y python3 python3-pip
 
 

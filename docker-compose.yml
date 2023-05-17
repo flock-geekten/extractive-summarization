@@ -12,11 +12,11 @@ services:
         container_name: "flock-es"
         # ポート番号の指定(ホスト:コンテナ)
         ports:
-          - 9990:9990
+          - 9980:9980
         # コンテナからローカルへバインドマウントする
         volumes: 
           - type: bind
             source: ./workspace/
             target: /home/workspace/
         # コンテナを立ち上げた時に実行されるコマンド
-        command: jupyter lab --ip=0.0.0.0 --port=9990 --allow-root --no-browser --notebook-dir="/home/workspace/"
+        command: jupyter lab --ip=0.0.0.0 --port=9980 --allow-root --no-browser --notebook-dir="/home/workspace/"
